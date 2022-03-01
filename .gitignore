@@ -1,0 +1,10 @@
+.idea
+.DS_Store
+node_modules
+*.tfstate.*
+terraform
+.terraform/
+.credentials
+.vs/
+terraform.tfstate
+.terraform.lock.hcl
