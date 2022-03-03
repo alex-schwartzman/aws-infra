@@ -38,9 +38,9 @@ provider "kubernetes" {
 resource "kubernetes_deployment" "main" {
   for_each = toset(var.targets)
   metadata {
-    name = "main-${split("//", each.value)[1]}"
+    name = "main-${replace(split("//", each.value)[1],"/","-")}"
     labels = {
-      app = "main-${split("//", each.value)[1]}"
+      app = "main-${replace(split("//", each.value)[1],"/","-")}"
     }
     namespace = "default"
   }
@@ -48,13 +48,13 @@ resource "kubernetes_deployment" "main" {
     replicas = var.replicas
     selector {
       match_labels = {
-        app = "main-${split("//", each.value)[1]}"
+        app = "main-${replace(split("//", each.value)[1],"/","-")}"
       }
     }
     template {
       metadata {
         labels = {
-          app = "main-${split("//", each.value)[1]}"
+          app = "main-${replace(split("//", each.value)[1],"/","-")}"
         }
       }
       spec {
